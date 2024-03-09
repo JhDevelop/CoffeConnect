@@ -12,18 +12,19 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   const [title, setTitle] = React.useState("Header");
+
   return (
-    <>
+    <NavigationContainer>
       <HeaderComponent name={title} />
-      <NavigationContainer>
-        <AppNavigation setTitle={setTitle}/>
-      </NavigationContainer>
-    </>
+      <AppNavigation setTitle={setTitle}/>
+    </NavigationContainer>
   );
+  
 }
 
 function AppNavigation({ setTitle }) {
   const navigation = useNavigation();
+
 
   React.useEffect(() => {
     const unsubscribe = navigation.addListener("state", () => {
@@ -34,12 +35,14 @@ function AppNavigation({ setTitle }) {
     return unsubscribe;
   }, [navigation, setTitle]);
 
-  return <Stack.Navigator initialRouteName="HomeView">
-    <Stack.Screen name="HomeView" component={HomeView} options={{ headerShown: false }} />
-    <Stack.Screen name="ProductView" component={ProductView} options={{ headerShown: false }} />
-    <Stack.Screen name="ProductMapView" component={ProductMapView} options={{ headerShown: false }} />
-    <Stack.Screen name="BagView" component={BagView} options={{ headerShown: false }} />
-  </Stack.Navigator>;
+  return (
+    <Stack.Navigator initialRouteName="HomeView">
+      <Stack.Screen name="HomeView" component={HomeView} options={{ headerShown: false }} />
+      <Stack.Screen name="ProductView" component={ProductView} options={{ headerShown: false }} />
+      <Stack.Screen name="ProductMapView" component={ProductMapView} options={{ headerShown: false }} />
+      <Stack.Screen name="BagView" component={BagView} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, TouchableHighlight, Text, StyleSheet } from "react-native";
-
+import { useNavigation } from '@react-navigation/native';
 
 const CustomButton = ({ title, onPress }) => {
     return (
@@ -17,11 +17,11 @@ const SellButton = () => {
         setTimeout(() => {
             setButtonPressed(true);
         }, 1);
-    };
+    }
 
     const handlePressOut = () => {
         setButtonPressed(false);
-    };
+    }
 
     return (
         <TouchableHighlight
@@ -46,11 +46,16 @@ const SellButton = () => {
             <Text style={styles.buttonText}>Comprar</Text>
         </TouchableHighlight>
     );
-};
+}
 
 
 const OffetButton = () => {
+    const navigation = useNavigation();
     const [buttonPressed, setButtonPressed] = useState(false);
+
+    const handlePress = () => {
+        navigation.navigate('ProductView');
+    };
 
     const handlePressIn = () => {
         setTimeout(() => {
@@ -61,7 +66,8 @@ const OffetButton = () => {
     const handlePressOut = () => {
         setButtonPressed(false);
     };
-    return(
+
+    return (
         <TouchableHighlight
             style={[
                 styles.obutton,
@@ -76,7 +82,7 @@ const OffetButton = () => {
                     shadowRadius: 10.84,
                 },
             ]}
-            onPress={() => { }}
+            onPress={handlePress} // Llama a handlePress directamente aquí
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
             underlayColor="transparent"

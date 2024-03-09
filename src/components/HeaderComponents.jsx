@@ -1,29 +1,30 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableHighlight, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-const HeaderComponent = ({ name, navigation }) => {
-    if (name === "HomeView" ) {
-        return null;
-    }
-    else if (name === "BagView") {
+
+const HeaderComponent = ({ name }) => {
+    const handleHomePress = () => {
+        navigation.navigate('HomeView');
+    };
+
+    const handleBagPress = () => {
+        navigation.navigate('HomeView');
+    };
+
+    if (name === "HomeView" || name === "BagView") {
         return (
-            <View style={styles.header}>
-                <TouchableHighlight style={styles.buttonNav} onPress={() => navigation.goBack()}>
-                    <Ionicons name="arrow-back-outline" size={24} color="black" />
-                </TouchableHighlight>
-                <Text style={styles.title}>{name}</Text>
-                <View style={styles.spacer}></View>
-            </View>
+            <></>
         );
     }
+
     return (
         <View style={styles.header}>
-            <TouchableHighlight style={styles.buttonNav} onPress={() => navigation.goBack()}>
+            <TouchableHighlight style={styles.buttonNav} onPress={handleHomePress}>
                 <Ionicons name="arrow-back-outline" size={24} color="black" />
             </TouchableHighlight>
             <Text style={styles.title}>{name}</Text>
-            <TouchableHighlight style={styles.buttonNav} onPress={() => navigation.navigate("SomeScreen")}>
-                <Ionicons name="bag-handle-outline" size={24} color="black" backgroundColor="transparent"/>
+            <TouchableHighlight style={styles.buttonNav} onPress={handleBagPress}>
+                <Ionicons name="bag-handle-outline" size={24} color="black" />
             </TouchableHighlight>
         </View>
     );
